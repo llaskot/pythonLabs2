@@ -1,7 +1,6 @@
-from pathlib import Path
 import sqlite3
 
-from db_prepare.connection import DB_PATH
+from connection import DB_PATH
 
 insert_cars = [
     ("Toyota Corolla", 2020, "Red", "ABC123", 50, 10),

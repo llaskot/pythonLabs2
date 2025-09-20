@@ -1,5 +1,5 @@
-
 from models.model import Model
+
 
 class ClientModel(Model):
     def __init__(self, name, license_num):

@@ -1,9 +1,8 @@
 import sqlite3
 
-from db_prepare.connection import DB_PATH
+from connection import DB_PATH
 
 # connection = sqlite3.connect(DB_PATH)
-
 
 
 create_cars_table = '''CREATE TABLE IF NOT EXISTS cars (
@@ -14,7 +13,7 @@ create_cars_table = '''CREATE TABLE IF NOT EXISTS cars (
     license_plates TEXT  UNIQUE NOT NULL,
     day_price REAL DEFAULT 0,
     insurance_price REAL DEFAULT 0,
-    avalabulity INTEGER DEFAULT 1 NOT NULL
+    availability INTEGER DEFAULT 1 NOT NULL
 );
 '''
 

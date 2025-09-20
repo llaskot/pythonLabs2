@@ -1,8 +1,6 @@
-from pathlib import Path
 import sqlite3
 
-BASE_DIR = Path(__file__).resolve().parent.parent  # папка на уровень выше
-DB_PATH = BASE_DIR / "car_rent.db"
+from connection import DB_PATH
 
 delete_cars = '''DROP TABLE IF EXISTS cars;'''
 delete_users = '''DROP TABLE IF EXISTS clients;'''

@@ -1,4 +1,4 @@
-from db_prepare.connection import cursor, connection
+from connection import cursor, connection
 
 
 class Model:
