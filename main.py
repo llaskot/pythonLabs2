@@ -3,9 +3,9 @@ from models.clientModel import ClientModel
 from models.rentModel import RentModel
 
 if __name__ == '__main__':
-    # car = CarModel("Honda Civ", 2019, "Blue", "XYZ789", 45, 12)
-    # newCar = car.create()
-    # print(newCar)
+    car = CarModel("Honda Civ", 2019, "Blue", "XYZ789j", 45, 12)
+    newCar = car.create()
+    print(newCar)
 
     # car = CarModel("AAA", None, "Blueaa", None)
     # newCar = car.update_by_id(1)
@@ -24,6 +24,6 @@ if __name__ == '__main__':
 
     # print(ClientModel.delete_by('id', 6))
 
-    rent = RentModel(3, 5, 4, 800)
-    res = rent.create()
-    print(res)
+    # rent = RentModel(3, 5, 4, 800)
+    # res = rent.create()
+    # print(res)
