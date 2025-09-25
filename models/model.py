@@ -32,7 +32,6 @@ class Model:
         sql = f'''UPDATE {self.table} 
          SET {',\n '.join(fields)} WHERE id = ?'''
         cursor.execute(sql, values)
-        print(cursor.rowcount)
         connection.commit()
         return {'success': True, 'affected_rows': cursor.rowcount}
 

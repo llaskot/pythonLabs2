@@ -5,14 +5,12 @@ from db_prepare.create_tables import create_cars_table, create_users_table, crea
 from db_prepare.delete_tables import delete_cars, delete_users, delete_rents
 from db_prepare.insert_test_data import insert_cars, insert_users, insert_rents
 from models.carModel import CarModel
+from models.clientModel import ClientModel
 
 DB_PATH = "car_rent.db"
 
 
 class BbTests(unittest.TestCase):
-
-    # conn
-    # cursor
 
     @classmethod
     def setUpClass(cls):
@@ -46,10 +44,16 @@ class BbTests(unittest.TestCase):
                 "VALUES (?, ?, ?, ?);", insert_rents
             )
 
-
+    def setUp(self):
+        # Подключение к тестовой БД
+        self.conn = sqlite3.connect(DB_PATH)
+        self.cursor = self.conn.cursor()
+        import models.model as model_mod
+        model_mod.cursor = self.cursor
+        model_mod.connection = self.conn
 
     def test_itself(self):
-        self.assertIsNotNone( 1)
+        self.assertIsNotNone(1)
 
     def test_db_init(self):
         conn = sqlite3.connect('car_rent.db')
@@ -58,5 +62,26 @@ class BbTests(unittest.TestCase):
 
     def test_model_find_by(self):
         car = CarModel.find_by('id', 1)
-        self.assertEqual({'columns': ['id', 'model', 'year', 'color', 'license_plates', 'day_price', 'insurance_price', 'availability'], 'values': [(1, 'Toyota Corolla', 2020, 'Red', 'ABC123', 50.0, 10.0, 1)], 'qty': 1}, car)
+        print(car)
+        self.assertEqual({'columns': ['id', 'model', 'year', 'color', 'license_plates', 'day_price', 'insurance_price',
+                                      'availability'],
+                          'values': [(1, 'Toyota Corolla', 2020, 'Red', 'ABC123', 50.0, 10.0, 1)], 'qty': 1}, car)
 
+    def test_model_create(self):
+        car = CarModel("Honda Civ", 2019, "Blue", "XYZ789j", 45, 12)
+        newCar = car.create()
+        print('new id = ', newCar['id'])
+        self.assertEqual(newCar['id'], 6)
+
+    def test_model_update_by_id(self):
+        client = ClientModel('Wasya Pupkin', None)
+        res = client.update_by_id(1)
+        print(res)
+        print(ClientModel.find_by('id', 1))
+        self.assertEqual({'success': True, 'affected_rows': 1}, res)
+
+    def test_delete_by(self):
+        res = ClientModel.delete_by('id', 2)
+        print(res)
+        print(ClientModel.find_by('id', 2))
+        self.assertEqual({'success': True, 'affected_rows': 1}, res)
