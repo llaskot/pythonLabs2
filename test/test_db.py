@@ -40,8 +40,8 @@ class BbTests(unittest.TestCase):
             )
 
             cursor.executemany(
-                "INSERT INTO rents (car_id, client_id, days_qty, total_price) "
-                "VALUES (?, ?, ?, ?);", insert_rents
+                "INSERT INTO rents (car_id, client_id, start_date, days_qty, total_price) "
+                "VALUES (?, ?, ?, ?, ?);", insert_rents
             )
 
     def setUp(self):
@@ -51,6 +51,10 @@ class BbTests(unittest.TestCase):
         import models.model as model_mod
         model_mod.cursor = self.cursor
         model_mod.connection = self.conn
+
+    def tearDown(self):
+        self.cursor.close()
+        self.conn.close()
 
     def test_itself(self):
         self.assertIsNotNone(1)

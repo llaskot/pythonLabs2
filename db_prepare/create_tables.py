@@ -25,12 +25,14 @@ create_users_table = '''CREATE TABLE IF NOT EXISTS clients (
 '''
 
 create_rent_table = '''CREATE TABLE IF NOT EXISTS rents (
+    id INTEGER PRIMARY KEY,
     car_id INTEGER NOT NULL,
     client_id INTEGER NOT NULL,
+    start_date TEXT,
     days_qty INTEGER NOT NULL,
     total_price REAL NOT NULL,
     active INTEGER NOT NULL DEFAULT 1,
-    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE SET NULL  
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE SET NULL,  
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE SET NULL
 );
 '''

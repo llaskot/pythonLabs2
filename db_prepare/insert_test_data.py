@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 from connection import DB_PATH
 
@@ -19,7 +20,9 @@ insert_users = [
 ]
 
 insert_rents = [
-    (1, 2, 3, 500)
+    (1, 2, datetime.now().strftime("%Y-%m-%d") , 3, 500),
+    (2, 4, datetime.now().strftime("%Y-%m-%d") , 8, 980)
+
 ]
 
 if __name__ == '__main__':
@@ -37,7 +40,7 @@ if __name__ == '__main__':
         )
 
         cursor.executemany(
-            "INSERT INTO rents (car_id, client_id, days_qty, total_price) "
-            "VALUES (?, ?, ?, ?);", insert_rents
+            "INSERT INTO rents (car_id, client_id, start_date, days_qty, total_price) "
+            "VALUES (?, ?, ?, ?, ?);", insert_rents
         )
 
