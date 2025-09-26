@@ -1,6 +1,9 @@
 # main_window.py
 import tkinter as tk
 
+from view.carsView import CarsView
+
+
 class MainWindow:
     def __init__(self):
         self.root = tk.Tk()
@@ -21,7 +24,9 @@ class MainWindow:
         self.btn1.pack(side="left",fill=tk.X, expand=True)
         self.btn2.pack(side="left",fill=tk.X, expand=True)
         self.btn3.pack(side="left",fill=tk.X, expand=True)
-        self.frame_holder = tk.Frame(self.root, background="red")
+        self.frame_holder = CarsView(self.root)
+        # self.frame_holder.pack(side="bottom", fill="both", expand=True)
+
 
         self.frame_holder.pack(side="bottom", fill="both", expand=True)
 
