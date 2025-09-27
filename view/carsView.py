@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from view.tables import Tables
+from controllers.carController import get_all_cars
 
 
 class CarsView(tk.Frame):
@@ -15,6 +16,7 @@ class CarsView(tk.Frame):
 
         self.info_frame = tk.Frame(self, bg="green")
         self.info_frame.pack(side="left", fill="both", expand=True)
-        self.table = Tables(self.info_frame, ['col1', 'col2'], [(1, 'aa'), (2, 'bb'), (3, 'cc')])
+        self.car_data = get_all_cars()
+        self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
         self.table.pack(fill="both", expand=True)
 

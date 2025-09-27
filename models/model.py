@@ -46,6 +46,15 @@ class Model:
         return {'columns': columns, 'values': vals, 'qty': len(vals)}
 
     @classmethod
+    def find_all(cls):
+        sql = f'''SELECT *
+            FROM {cls.table}'''
+        cursor.execute(sql)
+        columns = [desc[0] for desc in cursor.description]
+        vals = cursor.fetchall()
+        return {'columns': columns, 'values': vals, 'qty': len(vals)}
+
+    @classmethod
     def delete_by(cls, key, value):
         sql = f'''DELETE 
             FROM {cls.table}

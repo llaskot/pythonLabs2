@@ -6,6 +6,7 @@ from db_prepare.delete_tables import delete_cars, delete_users, delete_rents
 from db_prepare.insert_test_data import insert_cars, insert_users, insert_rents
 from models.carModel import CarModel
 from models.clientModel import ClientModel
+from models.rentModel import RentModel
 
 DB_PATH = "car_rent.db"
 
@@ -89,3 +90,8 @@ class BbTests(unittest.TestCase):
         print(res)
         print(ClientModel.find_by('id', 2))
         self.assertEqual({'success': True, 'affected_rows': 1}, res)
+
+    def test_find_all(self):
+        res = RentModel.find_all()
+        print(res)
+        self.assertEqual({'columns': ['id', 'car_id', 'client_id', 'start_date', 'days_qty', 'total_price', 'active'], 'values': [(1, 1, 2, '2025-09-27', 3, 500.0, 1), (2, 2, 4, '2025-09-27', 8, 980.0, 1)], 'qty': 2}, res)
