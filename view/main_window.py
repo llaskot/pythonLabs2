@@ -36,7 +36,7 @@ class MainWindow:
     def switch_frame(self):
         if self.frame_holder:
             self.frame_holder.destroy()
-        print(self.var)
+        # print(self.var.get())
         match self.var.get():
             case "rent":
                 self.frame_holder = RentView(self.root)

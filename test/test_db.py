@@ -94,4 +94,6 @@ class BbTests(unittest.TestCase):
     def test_find_all(self):
         res = RentModel.find_all()
         print(res)
-        self.assertEqual({'columns': ['id', 'car_id', 'client_id', 'start_date', 'days_qty', 'total_price', 'active'], 'values': [(1, 1, 2, '2025-09-27', 3, 500.0, 1), (2, 2, 4, '2025-09-27', 8, 980.0, 1)], 'qty': 2}, res)
+        self.assertEqual({'columns': ['id', 'car_id', 'client_id', 'start_date', 'days_qty', 'total_price', 'active'],
+                          'values': [(1, 1, 2, '2025-09-27', 3, 500.0, 1), (2, 2, 4, '2025-09-27', 8, 980.0, 1)],
+                          'qty': 2}, res)
