@@ -11,7 +11,7 @@ class Model:
         values = []
         for (key, value) in self.__dict__.items():
             if key in self.required_columns and value is None:
-                raise KeyError(f'The values of {self.required_columns} must be truthy')
+                raise KeyError(f'The values of {self.required_columns} must be')
             fields.append(key)
             place_holder.append(' ?')
             values.append(value)
