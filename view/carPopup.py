@@ -69,7 +69,7 @@ class CarPopup(tk.Toplevel):
     # validation
     @classmethod
     def validate_year(cls, val):
-        return val.isdigit() and len(val) <= 4
+        return (val.isdigit() or val=="") and len(val) <= 4
 
     @classmethod
     def validate_price(cls, val):
