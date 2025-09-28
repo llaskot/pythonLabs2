@@ -29,6 +29,13 @@ def create_car(vals: tuple):
 
 def get_car_by_id(car_id):
     try:
-        return CarModel.find_by("id", car_id)
+        return CarModel.find_by("id", int(car_id))
+    except Exception as e:
+        raise e
+
+
+def delete_car_by_id(car_id):
+    try:
+        return CarModel.delete_by("id", int(car_id))
     except Exception as e:
         raise e

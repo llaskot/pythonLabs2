@@ -10,7 +10,7 @@ class CarPopup(tk.Toplevel):
         super().__init__(master)
         self.car_id = car_id
         self.availability_status = tk.IntVar(value=1)
-        self.withdraw()
+        # self.withdraw()
         self.title("Add new car" if not car_id else f"Update the car # {car_id}")
         self.geometry("500x350")
         self.valid_year = (self.register(self.validate_year), "%P")
@@ -55,16 +55,11 @@ class CarPopup(tk.Toplevel):
         self.radio_no = tk.Radiobutton(self.availability, text="No", variable=self.availability_status, value=0)
         self.radio_yes.pack(side="left")
         self.radio_no.pack(side="left")
-
-        if self.car_id:
-            self.fill_in()
-
         tk.Button(self, text="Cancel", command=self.on_cancel).pack(pady=10, padx=15, side="left")
         tk.Button(self, text="Save", command=self.on_save).pack(pady=10, padx=15, side="right")
-
-
-
-        self.deiconify()
+        # self.deiconify()
+        if self.car_id:
+            self.fill_in()
 
     # validation
     @classmethod
@@ -91,8 +86,11 @@ class CarPopup(tk.Toplevel):
                 self.price_entry.get(),
                 self.insurance_entry.get(),
                 self.availability_status.get())
+
         try:
             create_car(vals)
+            messagebox.showinfo("Success", "Successfully saved")
+            self.destroy()
         except sqlError as e:
             messagebox.showerror("Database error", str(e))
         except KeyError as e:
@@ -111,7 +109,9 @@ class CarPopup(tk.Toplevel):
             self.insurance_entry.insert(0,str(car[6]))
             self.availability_status.set(car[7])
         except Exception as e:
-            messagebox.showerror("Something went wrong", str(e))
+            self.on_cancel()
+            messagebox.showerror("Something went wrong", str(e) + "\nMay by this car doesn't exist?")
+
 
 
 
