@@ -17,6 +17,8 @@ class CarsView(tk.Frame):
         self.func_frame.pack(side="left", fill="y")
         self.func_frame.pack_propagate(False)
 
+        self.search_func = search_car
+
         self.search_label = tk.Label(self.func_frame,
                                      text="Search car",
                                      font=("Arial", 16, "bold")
@@ -134,7 +136,7 @@ class CarsView(tk.Frame):
 
     def search(self, *args):
         try:
-            res = search_car(self.search_var.get().strip())
+            res = self.search_func(self.search_var.get().strip())
             if res["qty"] > 0:
                 self.car_data = res
                 self.table.destroy()

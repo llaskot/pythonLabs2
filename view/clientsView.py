@@ -1,6 +1,5 @@
 import tkinter as tk
-
-from controllers.clientController import get_all_clients, delete_client_by_id
+from controllers.clientController import get_all_clients, delete_client_by_id, search_client
 from view.carsView import CarsView
 from view.clientPopup import ClientPopup
 from view.tables import Tables
@@ -13,6 +12,7 @@ class ClientView(CarsView):
         self.search_label.config(text="Search Clients")
         self.label_id.config(text="Client ID")
         self.add_button.config(text="add client")
+        self.search_func = search_client
 
         self.car_data = get_all_clients()
         self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
