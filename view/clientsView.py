@@ -1,18 +1,23 @@
 import tkinter as tk
 
+from controllers.clientController import get_all_clients
+from view.carsView import CarsView
+from view.tables import Tables
 
-class ClientView(tk.Frame):
+
+class ClientView(CarsView):
     def __init__(self, master):
-        super().__init__(master, bg="red")
+        super().__init__(master)
 
-        self.func_frame = tk.Frame(self, width=350, bg="red")
-        self.func_frame.pack(side="left", fill="y")
-        self.func_frame.pack_propagate(False)
-        # self.add_button = tk.Button(self.func_frame,  height=2 , text="add car", )
-        # self.add_button.pack(side="top", fill="x", padx=10, pady=15)
+        self.search_label.config(text="Search Clients")
+        self.label_id.config(text="Client ID")
+        self.add_button.config(text="add client")
 
-        self.info_frame = tk.Frame(self, bg="green")
-        self.info_frame.pack(side="left", fill="both", expand=True)
-        # self.car_data = get_all_cars()
-        # self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
-        # self.table.pack(fill="both", expand=True)
+        self.car_data = get_all_clients()
+        self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
+        self.table.grid(row=0, column=0, sticky="nsew")
+
+
+    def open_add_window(self, client_id=None):
+        self.entry_id.delete(0, tk.END)
+        return ClientPopup(self, client_id, on_close=self.update_table)
