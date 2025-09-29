@@ -1,3 +1,4 @@
+from connection import cursor
 from models.model import Model
 
 
@@ -13,3 +14,22 @@ class CarModel(Model):
 
     table = "cars"
     required_columns = {'model', 'year', 'color', 'license_plates'}
+
+    @classmethod
+    def search(cls, val):
+        val = f"%{val}%"
+        sql = f'''
+        SELECT *
+        FROM cars 
+        WHERE id LIKE ?
+        OR "model" LIKE ?
+        OR license_plates LIKE ?
+        '''
+        cursor.execute(sql, (val, val, val))
+        columns = [desc[0] for desc in cursor.description]
+        vals = cursor.fetchall()
+        return {'columns': columns, 'values': vals, 'qty': len(vals)}
+
+
+# if __name__ == "__main__":
+#     print(CarModel.search("a"))

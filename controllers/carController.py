@@ -39,3 +39,10 @@ def delete_car_by_id(car_id):
         return CarModel.delete_by("id", int(car_id))
     except Exception as e:
         raise e
+
+
+def search_car(val):
+    try:
+        return CarModel.search(val)
+    except Exception as e:
+        raise e

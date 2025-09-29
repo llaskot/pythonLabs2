@@ -6,11 +6,11 @@ from controllers.carController import create_car, get_car_by_id
 
 
 class CarPopup(tk.Toplevel):
-    def __init__(self, master, car_id=None):
+    def __init__(self, master, car_id=None,  on_close=None):
+        self.on_close = on_close
         super().__init__(master)
         self.car_id = car_id
         self.availability_status = tk.IntVar(value=1)
-        # self.withdraw()
         self.title("Add new car" if not car_id else f"Update the car # {car_id}")
         self.geometry("500x350")
         self.valid_year = (self.register(self.validate_year), "%P")
@@ -57,7 +57,6 @@ class CarPopup(tk.Toplevel):
         self.radio_no.pack(side="left")
         tk.Button(self, text="Cancel", command=self.on_cancel).pack(pady=10, padx=15, side="left")
         tk.Button(self, text="Save", command=self.on_save).pack(pady=10, padx=15, side="right")
-        # self.deiconify()
         if self.car_id:
             self.fill_in()
 
@@ -75,6 +74,8 @@ class CarPopup(tk.Toplevel):
         return True
 
     def on_cancel(self):
+        if self.on_close:
+            self.on_close()
         self.destroy()
 
     def on_save(self):
@@ -90,6 +91,8 @@ class CarPopup(tk.Toplevel):
         try:
             create_car(vals)
             messagebox.showinfo("Success", "Successfully saved")
+            if self.on_close:
+                self.on_close()
             self.destroy()
         except sqlError as e:
             messagebox.showerror("Database error", str(e))
