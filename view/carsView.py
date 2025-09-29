@@ -105,7 +105,7 @@ class CarsView(tk.Frame):
         self.entry_id.delete(0, tk.END)
         return CarPopup(self, car_id, on_close=self.update_table)
 
-    def delete_car(self):
+    def delete_unit(self):
         try:
             return delete_car_by_id(self.entry_id.get())
         except Exception as e:
@@ -114,7 +114,7 @@ class CarsView(tk.Frame):
     def confirm_delete(self):
         if messagebox.askyesno("Confirm", "Are you sure you want to delete?"):
             try:
-                res = self.delete_car()
+                res = self.delete_unit()
                 self.entry_id.delete(0, tk.END)
                 if res["success"] and res["affected_rows"] > 0:
                     messagebox.showinfo("Success", "Successfully deleted")
@@ -122,7 +122,7 @@ class CarsView(tk.Frame):
                 else:
                     messagebox.showerror("Something went wrong", "Looks like there is nothing to delete")
             except Exception as e:
-                messagebox.showerror("Something went wrong", str(e) + "\nMay by this car doesn't exist?")
+                messagebox.showerror("Something went wrong", str(e) + "\nMay by this record doesn't exist?")
 
     def check_input(self, *args):
         if self.entry_id.get().strip():
