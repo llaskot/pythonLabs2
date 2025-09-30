@@ -12,12 +12,12 @@ class CarsView(tk.Frame):
 
         self.car_id_var = tk.StringVar()
         self.search_var = tk.StringVar()
+        self.search_func = search_car
+        self.get_all_rows_func = get_all_cars
 
         self.func_frame = tk.Frame(self, width=240, bg="blue")
         self.func_frame.pack(side="left", fill="y")
         self.func_frame.pack_propagate(False)
-
-        self.search_func = search_car
 
         self.search_label = tk.Label(self.func_frame,
                                      text="Search car",
@@ -92,12 +92,13 @@ class CarsView(tk.Frame):
         # вертикальный скролл
         self.vsb = ttk.Scrollbar(self.info_frame, orient="vertical", command=self.table.yview)
         self.vsb.grid(row=0, column=1, sticky="ns")
-        self.table.configure(yscrollcommand=self.vsb.set)
 
         # горизонтальный скролл
         self.hsb = ttk.Scrollbar(self.info_frame, orient="horizontal", command=self.table.xview)
         self.hsb.grid(row=1, column=0, sticky="ew")
-        self.table.configure(xscrollcommand=self.hsb.set)
+
+        self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
+
 
         # Настройка растяжки
         self.info_frame.grid_rowconfigure(0, weight=1)
@@ -159,11 +160,11 @@ class CarsView(tk.Frame):
         self.search_entry.delete(0, tk.END)
         self.search_var.set('')
         self.table.destroy()
-        self.car_data = get_all_cars()
+        self.car_data = self.get_all_rows_func()
         self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
         self.table.grid(row=0, column=0, sticky="nsew")
 
         self.vsb.configure(command=self.table.yview)
-        self.table.configure(yscrollcommand=self.vsb.set)
+        # self.table.configure(yscrollcommand=self.vsb.set)
         self.hsb.configure(command=self.table.xview)
-        self.table.configure(xscrollcommand=self.hsb.set)
+        self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)

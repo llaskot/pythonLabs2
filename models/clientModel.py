@@ -24,3 +24,4 @@ class ClientModel(Model):
         columns = [desc[0] for desc in cursor.description]
         vals = cursor.fetchall()
         return {'columns': columns, 'values': vals, 'qty': len(vals)}
+

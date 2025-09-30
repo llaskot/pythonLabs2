@@ -62,3 +62,16 @@ class Model:
         cursor.execute(sql, (value,))
         connection.commit()
         return {'success': True, 'affected_rows': cursor.rowcount}
+
+    @classmethod
+    def search_single_str(cls,column, val):
+        val = f"%{val}%"
+        sql = f'''
+        SELECT *
+        FROM {cls.table} 
+        WHERE {column} LIKE ?
+        '''
+        cursor.execute(sql, (val,))
+        columns = [desc[0] for desc in cursor.description]
+        vals = cursor.fetchall()
+        return {'columns': columns, 'values': vals, 'qty': len(vals)}

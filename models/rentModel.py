@@ -16,7 +16,7 @@ class RentModel(Model):
     @classmethod
     def get_full_info(cls, id=None):
 
-        sql = f'''SELECT re.id AS rent_number, cl.name AS client_name, ca.model AS car_model,
+        sql = f'''SELECT re.id AS rent_number, cl.name||" #"||cl.id AS client_name, ca.model AS car_model,
                             ca.license_plates, re.start_date, re.days_qty, re.total_price, re.active AS active_status
                     FROM rents re 
                     JOIN cars ca ON re.car_id = ca.id

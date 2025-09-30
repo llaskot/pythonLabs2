@@ -1,18 +1,50 @@
 import tkinter as tk
+from tkinter import ttk
+
+from controllers.clientController import get_all_clients, delete_client_by_id, search_client
+from controllers.rentController import get_all_rents
+from view.carsView import CarsView
+from view.clientPopup import ClientPopup
+from view.rentPopup import RentPopup
+from view.tables import Tables
 
 
-class RentView(tk.Frame):
+class RentView(CarsView):
     def __init__(self, master):
-        super().__init__(master, bg="red")
+        super().__init__(master)
 
-        self.func_frame = tk.Frame(self, width=350, bg="green")
-        self.func_frame.pack(side="left", fill="y")
-        self.func_frame.pack_propagate(False)
-        # self.add_button = tk.Button(self.func_frame,  height=2 , text="add car", )
-        # self.add_button.pack(side="top", fill="x", padx=10, pady=15)
+        self.search_label.config(text="Search Rent")
+        self.label_id.config(text="Rent ID")
+        self.add_button.config(text="Add Rent")
 
-        self.info_frame = tk.Frame(self, bg="green")
-        self.info_frame.pack(side="left", fill="both", expand=True)
-        # self.car_data = get_all_cars()
-        # self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
-        # self.table.pack(fill="both", expand=True)
+
+        self.search_func = search_client
+        self.get_all_rows_func = get_all_rents
+
+        self.car_data = get_all_rents()
+        self.table = Tables(self.info_frame, self.car_data["columns"], self.car_data["values"])
+        self.table.grid(row=0, column=0, sticky="nsew")
+
+        # вертикальный скролл
+        self.vsb = ttk.Scrollbar(self.info_frame, orient="vertical", command=self.table.yview)
+        self.vsb.grid(row=0, column=1, sticky="ns")
+
+        # горизонтальный скролл
+        self.hsb = ttk.Scrollbar(self.info_frame, orient="horizontal", command=self.table.xview)
+        self.hsb.grid(row=1, column=0, sticky="ew")
+
+        self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
+
+
+
+
+
+    def open_add_window(self, client_id=None):
+        self.entry_id.delete(0, tk.END)
+        return RentPopup(self, client_id, on_close=self.update_table)
+
+    def delete_unit(self):
+        try:
+            return delete_client_by_id(self.entry_id.get())
+        except Exception as e:
+            raise e
