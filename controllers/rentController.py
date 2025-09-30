@@ -10,31 +10,9 @@ def get_all_rents():
     except Exception as e:
         raise e
 
-
-def create_client(vals: tuple):
+def get_car(car_id):
     try:
-        client = ClientModel(
-            vals[1] if vals[1] else None,
-            vals[2] if vals[2] else None
-        )
-        if vals[0]:
-            client.update_by_id(vals[0])
-        else:
-            client.create()
-    except Exception as e:
-        raise e
-
-
-def get_client_by_id(car_id):
-    try:
-        return ClientModel.find_by("id", int(car_id))
-    except Exception as e:
-        raise e
-
-
-def delete_client_by_id(client_id):
-    try:
-        return ClientModel.delete_by("id", int(client_id))
+        return CarModel.find_by('id', car_id)
     except Exception as e:
         raise e
 

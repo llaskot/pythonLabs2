@@ -5,7 +5,7 @@ from tkinter import messagebox, ttk
 from tkcalendar import Calendar, DateEntry
 
 from controllers.carController import create_car, get_car_by_id
-from controllers.rentController import get_users_list, get_cars_list
+from controllers.rentController import get_users_list, get_cars_list, get_car
 from view.clientPopup import ClientPopup
 
 
@@ -79,7 +79,8 @@ class RentPopup(tk.Toplevel):
         try:
             self.clients = get_users_list(self.client_search_var.get())
             self.clients_box['values'] = list(self.clients.keys())
-            if len(self.clients_box["values"]) == 0 and ": " not in self.client_search_var.get():
+            if len(self.clients_box["values"]) == 0:
+                    # and ": " not in self.client_search_var.get()):
                 self.add_client['state'] = "normal"
             else:
                 self.add_client['state'] = "disabled"
@@ -108,20 +109,15 @@ class RentPopup(tk.Toplevel):
 
     def on_save(self):
 
-        vals = (self.car_id,
-                self.model_entry.get(),
-                self.year_entry.get(),
-                self.color_entry.get(),
-                self.lic_entry.get(),
-                self.price_entry.get(),
-                self.insurance_entry.get(),
-                self.availability_status.get())
         try:
-            create_car(vals)
+            print(self.car_box.get())
+            print(self.cars)
+            car = get_car(self.cars[self.car_box.get()])
+            print(car)
             messagebox.showinfo("Success", "Successfully saved")
-            if self.on_close:
-                self.on_close()
-            self.destroy()
+            # if self.on_close:
+            #     self.on_close()
+            # self.destroy()
         except sqlError as e:
             messagebox.showerror("Database error", str(e))
         except KeyError as e:
