@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from sqlite3 import Error as sqlError
 from view.carPopup import CarPopup
+from view.fileRxport import export_to_xlsx, export_to_doc
 from view.tables import Tables
 from controllers.carController import get_all_cars, delete_car_by_id, search_car
 
@@ -46,6 +47,7 @@ class CarsView(tk.Frame):
                                     padx=20,
                                     pady=15,
                                     font=("Arial", 16, "bold"))
+
         self.danger.pack(side="bottom", fill="x", padx=15, pady=15)
         self.add_button.pack(side="bottom", fill="x", padx=10, pady=15)
 
@@ -80,9 +82,30 @@ class CarsView(tk.Frame):
                                        bd=4,
                                        command=self.confirm_delete)
         self.delete_button.pack(side="left", fill="x", padx=3, pady=15, expand=True)
-
         self.car_id_var.trace_add("write", self.check_input)
 
+        self.save = tk.LabelFrame(self.func_frame, text=" Save to file ", padx=5, pady=5)
+        self.save.pack(padx=10, pady=1, side="bottom", fill="x", expand=True)
+
+        self.to_excel = tk.Button(self.save,
+                                  height=2,
+                                  text="To Excel",
+                                  font=("Arial", 9, "bold"),
+                                  bd=2,
+                                  command=self.to_excel
+                                  )
+        self.to_excel.pack(side="left", fill="x", padx=3, pady=3, expand=True)
+
+        self.to_doc = tk.Button(self.save,
+                                height=2,
+                                text="To Doc",
+                                font=("Arial", 9, "bold"),
+                                bd=2,
+                                command=self.to_doc
+                                )
+        self.to_doc.pack(side="left", fill="x", padx=3, pady=3, expand=True)
+
+        # Table
         self.info_frame = tk.Frame(self, bg="green")
         self.info_frame.pack(fill="both", expand=True)
         self.car_data = get_all_cars()
@@ -98,7 +121,6 @@ class CarsView(tk.Frame):
         self.hsb.grid(row=1, column=0, sticky="ew")
 
         self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
-
 
         # Настройка растяжки
         self.info_frame.grid_rowconfigure(0, weight=1)
@@ -168,3 +190,9 @@ class CarsView(tk.Frame):
         # self.table.configure(yscrollcommand=self.vsb.set)
         self.hsb.configure(command=self.table.xview)
         self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
+
+    def to_excel(self):
+        export_to_xlsx(self.table, self.__class__.__name__)
+
+    def to_doc(self):
+        export_to_doc(self.table, self.__class__.__name__)
