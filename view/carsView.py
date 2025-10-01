@@ -192,7 +192,17 @@ class CarsView(tk.Frame):
         self.table.configure(xscrollcommand=self.hsb.set, yscrollcommand=self.vsb.set)
 
     def to_excel(self):
-        export_to_xlsx(self.table, self.__class__.__name__)
+        try:
+            res = export_to_xlsx(self.table, self.__class__.__name__)
+            if res:
+                messagebox.showinfo("Success", "Successfully saved")
+        except Exception as e:
+            messagebox.showerror("Something went wrong", str(e))
 
     def to_doc(self):
-        export_to_doc(self.table, self.__class__.__name__)
+        try:
+            res = export_to_doc(self.table, self.__class__.__name__)
+            if res:
+                messagebox.showinfo("Success", "Successfully saved")
+        except Exception as e:
+            messagebox.showerror("Something went wrong", str(e))
