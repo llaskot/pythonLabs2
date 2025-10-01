@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-
 from controllers.clientController import get_all_clients, delete_client_by_id, search_client
 from view.carsView import CarsView
 from view.clientPopup import ClientPopup

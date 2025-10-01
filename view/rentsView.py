@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from sqlite3 import Error as sqlError
-from controllers.clientController import search_client
-from controllers.rentController import get_all_rents, change_statuses
+from controllers.rentController import get_all_rents, change_statuses, search_rent
 from view.carsView import CarsView
 from view.rentPopup import RentPopup
 from view.tables import Tables
@@ -20,7 +19,7 @@ class RentView(CarsView):
         self.update_button.config(text="Car is back", command=self.end_rent)
         self.get_all_rows_func = get_all_rents
 
-        self.search_func = search_client
+        self.search_func = search_rent
         self.get_all_rows_func = get_all_rents
 
         self.car_data = get_all_rents()

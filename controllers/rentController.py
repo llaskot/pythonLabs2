@@ -19,7 +19,7 @@ def get_car(car_id):
 
 def search_rent(val):
     try:
-        return RentModel.search(val)
+        return RentModel.search_full_info(val)
     except Exception as e:
         raise e
 

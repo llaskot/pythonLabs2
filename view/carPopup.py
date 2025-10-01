@@ -6,7 +6,7 @@ from controllers.carController import create_car, get_car_by_id
 
 
 class CarPopup(tk.Toplevel):
-    def __init__(self, master, car_id=None,  on_close=None):
+    def __init__(self, master, car_id=None, on_close=None):
         self.on_close = on_close
         super().__init__(master)
         self.car_id = car_id
@@ -55,15 +55,15 @@ class CarPopup(tk.Toplevel):
         self.radio_no = tk.Radiobutton(self.availability, text="No", variable=self.availability_status, value=0)
         self.radio_yes.pack(side="left")
         self.radio_no.pack(side="left")
-        tk.Button(self, text="Cancel", command=self.on_cancel).pack(pady=10, padx=15, side="left")
-        tk.Button(self, text="Save", command=self.on_save).pack(pady=10, padx=15, side="right")
+        tk.Button(self, text="Cancel", command=self.on_cancel, width=10).pack(pady=10, padx=15, side="left")
+        tk.Button(self, text="Save", command=self.on_save, width=10).pack(pady=10, padx=15, side="right")
         if self.car_id:
             self.fill_in()
 
     # validation
     @classmethod
     def validate_year(cls, val):
-        return (val.isdigit() or val=="") and len(val) <= 4
+        return (val.isdigit() or val == "") and len(val) <= 4
 
     @classmethod
     def validate_price(cls, val):
@@ -105,19 +105,12 @@ class CarPopup(tk.Toplevel):
         try:
             car = get_car_by_id(self.car_id)["values"][0]
             self.model_entry.insert(0, car[1])
-            self.color_entry.insert(0,car[3])
-            self.year_entry.insert(0,str(car[2]))
-            self.lic_entry.insert(0,car[4])
-            self.price_entry.insert(0,str(car[5]))
-            self.insurance_entry.insert(0,str(car[6]))
+            self.color_entry.insert(0, car[3])
+            self.year_entry.insert(0, str(car[2]))
+            self.lic_entry.insert(0, car[4])
+            self.price_entry.insert(0, str(car[5]))
+            self.insurance_entry.insert(0, str(car[6]))
             self.availability_status.set(car[7])
         except Exception as e:
             self.on_cancel()
             messagebox.showerror("Something went wrong", str(e) + "\nMay by this car doesn't exist?")
-
-
-
-
-
-
-

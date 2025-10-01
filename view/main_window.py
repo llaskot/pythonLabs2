@@ -1,6 +1,5 @@
 # main_window.py
 import tkinter as tk
-
 from view.carsView import CarsView
 from view.rentsView import RentView
 from view.clientsView import ClientView
@@ -14,9 +13,7 @@ class MainWindow:
         self.root.minsize(600, 400)
         self.var = tk.StringVar()
         self.var.set("rent")
-        self.setup_widgets()
 
-    def setup_widgets(self):
         self.tabs = tk.Frame(self.root)
         self.tabs.pack(side="top", fill='x')
         self.btn1 = tk.Radiobutton(self.tabs, height=2, text="Rents", variable=self.var, value="rent",
@@ -28,15 +25,13 @@ class MainWindow:
         self.btn1.pack(side="left", fill=tk.X, expand=True)
         self.btn2.pack(side="left", fill=tk.X, expand=True)
         self.btn3.pack(side="left", fill=tk.X, expand=True)
-
         self.frame_holder = RentView(self.root)
-
         self.frame_holder.pack(side="bottom", fill="both", expand=True)
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
     def switch_frame(self):
         if self.frame_holder:
             self.frame_holder.destroy()
-        # print(self.var.get())
         match self.var.get():
             case "rent":
                 self.frame_holder = RentView(self.root)
@@ -48,3 +43,9 @@ class MainWindow:
 
     def run(self):
         self.root.mainloop()
+
+    def on_close(self):
+        from connection import connection
+        if connection:
+            connection.close()
+        self.root.destroy()

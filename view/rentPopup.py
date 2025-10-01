@@ -62,8 +62,8 @@ class RentPopup(tk.Toplevel):
                                    validatecommand=self.valid_year)
         self.term_entry.pack(padx=10, pady=10, fill="x", side="left")
 
-        tk.Button(self, text="Cancel", command=self.on_cancel).pack(pady=10, padx=15, side="left")
-        tk.Button(self, text="Save", command=self.on_save).pack(pady=10, padx=15, side="right")
+        tk.Button(self, text="Cancel", command=self.on_cancel, width=10).pack(pady=10, padx=15, side="left")
+        tk.Button(self, text="Save", command=self.on_save, width=10).pack(pady=10, padx=15, side="right")
 
     def get_filtered_clients(self, *args):
         try:

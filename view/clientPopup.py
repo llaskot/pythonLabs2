@@ -11,7 +11,7 @@ class ClientPopup(tk.Toplevel):
         self.on_close = on_close
         self.client_id = client_id
         self.title("Add new client" if not client_id else f"Update the client # {client_id}")
-        self.geometry("500x350")
+        self.geometry("500x250")
         self.name = tk.LabelFrame(self, text="Client fullname", padx=5, pady=5)
         self.name.pack(padx=10, pady=1, fill="x")
         self.model_entry = tk.Entry(self.name)
@@ -21,8 +21,8 @@ class ClientPopup(tk.Toplevel):
         self.license.pack(padx=10, pady=1, fill="x")
         self.license_entry = tk.Entry(self.license)
         self.license_entry.pack(pady=5, fill="x")
-        tk.Button(self, text="Cancel", command=self.on_cancel).pack(pady=10, padx=15, side="left")
-        tk.Button(self, text="Save", command=self.on_save).pack(pady=10, padx=15, side="right")
+        tk.Button(self, text="Cancel", command=self.on_cancel, width=10).pack(pady=10, padx=15, side="left")
+        tk.Button(self, text="Save", command=self.on_save, width=10).pack(pady=10, padx=15, side="right")
         if self.client_id:
             self.fill_in()
 
