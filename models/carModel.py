@@ -30,6 +30,18 @@ class CarModel(Model):
         vals = cursor.fetchall()
         return {'columns': columns, 'values': vals, 'qty': len(vals)}
 
+    @classmethod
+    def search_available_cars(cls, column, val):
+        val = f"%{val}%"
+        sql = f'''
+        SELECT *
+        FROM {cls.table} 
+        WHERE availability = 1 and {column} LIKE ?
+        '''
+        cursor.execute(sql, (val,))
+        columns = [desc[0] for desc in cursor.description]
+        vals = cursor.fetchall()
+        return {'columns': columns, 'values': vals, 'qty': len(vals)}
 
 # if __name__ == "__main__":
 #     print(CarModel.search("a"))
