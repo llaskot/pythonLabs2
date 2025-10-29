@@ -38,20 +38,23 @@ class MainWindow:
         self.tabs.pack(side="top", fill='x')
 
     def _create_frame_holder(self, root):
-        self.frame_holder = RentView(root)
-        self.frame_holder.pack(side="bottom", fill="both", expand=True)
+        self.content_holder = tk.Frame(root)  # контейнер для всех вьюшек
+        self.content_holder.pack(side="bottom", fill="both", expand=True)
+        self.frame_holder = RentView(self.content_holder)
+        self.frame_holder.pack(fill="both", expand=True)
 
     def switch_frame(self):
         if self.frame_holder:
             self.frame_holder.destroy()
         match self.var.get():
             case "rent":
-                self.frame_holder = RentView(self.root)
+                self.frame_holder = RentView(self.content_holder)
             case "car":
-                self.frame_holder = CarsView(self.root)
+                self.frame_holder = CarsView(self.content_holder)
             case "client":
-                self.frame_holder = ClientView(self.root)
-        self.frame_holder.pack(side="bottom", fill="both", expand=True)
+                self.frame_holder = ClientView(self.content_holder)
+
+        self.frame_holder.pack(fill="both", expand=True)
 
     def run(self):
         self.root.mainloop()
