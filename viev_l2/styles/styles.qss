@@ -1,0 +1,26 @@
+.btn-blue {
+    background-color: #2E86C1;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+QPushButton[class="btn-blue"]:checked {
+    background-color: #1f618d;
+    border: 2px solid #154360;
+}
+
+
+.btn-green {
+    background-color: #28B463;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+.btn-orange {
+    background-color: #F39C12;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+}
