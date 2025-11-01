@@ -10,6 +10,28 @@ QPushButton[class="btn-blue"]:checked {
     border: 2px solid #154360;
 }
 
+.search-label {
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: #d3d3d3;
+    padding: 4px;
+    qproperty-alignment: 'AlignCenter';
+    margin: 3px;
+
+}
+
+.search-field {
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    padding: 4px;
+    background-color: qlineargradient(
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0 #fff, stop:1 #ccc
+    );
+    color: black;
+    margin: 3px;
+}
+
 
 .btn-green {
     background-color: #28B463;

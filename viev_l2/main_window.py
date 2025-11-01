@@ -1,11 +1,12 @@
 import os
+import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolBar, QSizePolicy, QWidget, QVBoxLayout, \
     QButtonGroup
-import sys
 
 from viev_l2.car import CarTab
 from viev_l2.rents import RentsTab
+from viev_l2.tab import TabAbstract
 
 
 class MainWindow(QMainWindow):
@@ -22,7 +23,7 @@ class MainWindow(QMainWindow):
         self.resize(800, 400)
 
         # get main content
-        self.contents = [RentsTab(), CarTab(), RentsTab()]
+        self.contents = [RentsTab(), CarTab(self.BUTTON_STYLE), TabAbstract("Users")]
 
         # fill in main_page elements
         central_holder_layout, central_holder = self.create_central_holder()
@@ -52,14 +53,14 @@ class MainWindow(QMainWindow):
         btn_group.buttonClicked[int].connect(self.select_tab)
 
         for text, num in btns:
-            btn = self.add_styled_button(text, num, "btn-blue")
+            btn = self.add_styled_button(text,"btn-blue")
             if num == 0:
                 btn.setChecked(True)
             btn_group.addButton(btn, num)
             tabs_toolbar.addWidget(btn)
         return tabs_toolbar
 
-    def add_styled_button(self, text: str, num: int, class_name: str) -> QPushButton:
+    def add_styled_button(self, text: str,  class_name: str) -> QPushButton:
         btn = QPushButton(text)
         btn.setProperty("class", class_name)
         btn.setCheckable(True)
