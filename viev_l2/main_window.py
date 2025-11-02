@@ -4,9 +4,10 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolBar, QSizePolicy, QWidget, QVBoxLayout, \
     QButtonGroup
 
-from viev_l2.car import CarTab
-from viev_l2.rents import RentsTab
-from viev_l2.tab import TabAbstract
+from viev_l2.cars_tab import CarTab
+from viev_l2.clients_tab import ClientTab
+from viev_l2.rents_tab import RentsTab
+from viev_l2.table_abstract import TabAbstract
 
 
 class MainWindow(QMainWindow):
@@ -23,7 +24,7 @@ class MainWindow(QMainWindow):
         self.resize(800, 400)
 
         # get main content
-        self.contents = [RentsTab(), CarTab(self.BUTTON_STYLE), TabAbstract("Users")]
+        self.contents = [RentsTab(self.BUTTON_STYLE), ClientTab(self.BUTTON_STYLE), CarTab(self.BUTTON_STYLE)]
 
         # fill in main_page elements
         central_holder_layout, central_holder = self.create_central_holder()
