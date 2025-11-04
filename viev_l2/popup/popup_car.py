@@ -14,7 +14,6 @@ class PopupCar(PopupCarAbstract):
         self.save_btn.clicked.connect(self._on_save)
 
     def _on_save(self):
-        print(self.parent().search_func)
         try:
             create_car((False, self.model_input.text(), self.year_input.text(), self.color_input.text(),
                         self.licen_input.text(), self.price_input.text(), self.insur_input.text(),

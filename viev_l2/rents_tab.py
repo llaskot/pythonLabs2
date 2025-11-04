@@ -1,5 +1,5 @@
 from controllers.rentController import search_rent
-from viev_l2.TableView import TableSection
+from viev_l2.tableView import TableSection
 from viev_l2.popup.popup_abstract import  PopupAbstract
 from viev_l2.tab_abstract import TabAbstract
 

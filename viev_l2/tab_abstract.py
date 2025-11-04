@@ -3,7 +3,7 @@ from typing import Callable
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QLineEdit, QPushButton, QGroupBox
 
-from viev_l2.TableView import TableModel, TableSection
+from viev_l2.tableView import TableModel, TableSection
 
 import PyQt5.QtWidgets as q
 

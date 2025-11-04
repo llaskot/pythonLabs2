@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox
 
 from controllers.carController import search_car, get_car_by_id, delete_car_by_id
-from viev_l2.TableView import TableSection
+from viev_l2.tableView import TableSection
 from viev_l2.popup.popup_car import PopupCar
 from viev_l2.popup.popup_car_update import PopupCarUpdate
 from viev_l2.tab_abstract import TabAbstract
@@ -54,7 +54,6 @@ class CarTab(TabAbstract):
         try:
             QMessageBox.question(self, "Confirm deletion", f"Do you really want to delete car # {self.id_val.text()}")
             res = delete_car_by_id(self.id_val.text())
-            print(res)
             if res["affected_rows"] == 0:
                 QMessageBox.warning(self, "Warning", f"Car {self.id_val.text()} Not found")
             else:

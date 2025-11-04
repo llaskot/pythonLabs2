@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Cars Rent Database GUI")
-        self.resize(800, 400)
+        self.resize(950, 650)
 
         # get main content
         self.contents = [RentsTab(self.BUTTON_STYLE), ClientTab(self.BUTTON_STYLE), CarTab(self.BUTTON_STYLE)]

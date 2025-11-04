@@ -116,7 +116,6 @@ class RentPopup(tk.Toplevel):
         try:
             data = prepare_data(self.cars[self.car_box.get()], self.clients[self.clients_box.get()],
                                 self.date_entry.get_date(), self.term_entry.get())
-            print(data)
             if messagebox.askyesno("Confirm",
                                    f' Check the data before saving. You`ll not be able to change or delete this '
                                    f'document:\n\n'
