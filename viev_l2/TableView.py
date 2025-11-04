@@ -22,10 +22,9 @@ class TableModel(QAbstractTableModel):
             return Qt.AlignCenter
         elif role == Qt.FontRole:
             font = QFont()
-            font.setPointSize(12)  # размер текста в ячейках
+            font.setPointSize(12)
             return font
         elif role == Qt.BackgroundRole:
-            # светло-серый фон для всех ячеек
             return QColor("#f5f5f5")
         else:
             return None
@@ -38,33 +37,32 @@ class TableModel(QAbstractTableModel):
                 return None
         elif role == Qt.FontRole and orientation == Qt.Horizontal:
             font = QFont()
-            font.setBold(True)  # жирный шрифт для заголовков
-            font.setPointSize(12)  # размер шрифта заголовка
+            font.setBold(True)
+            font.setPointSize(12)
             return font
         elif role == Qt.BackgroundRole and orientation == Qt.Horizontal:
-            # светло-серый фон заголовка
             return QColor("#e0e0e0")
         return None
 
 
 class TableSection(QWidget):
-    def __init__(self, data):
+    def __init__(self, data: dict):
         super().__init__()
         layout = QVBoxLayout(self)
         self.table = QTableView()
         header = self.table.horizontalHeader()
-        header.setMinimumSectionSize(120)  # минимальная ширина столбца
+        header.setMinimumSectionSize(120)
         header.setSectionResizeMode(QHeaderView.Stretch)
         layout.addWidget(self.table)
 
         model = TableModel(data)
 
-        # proxy для сортировки и фильтрации
+        # proxy for sorting
 
         self.proxy = QSortFilterProxyModel()
         self.proxy.setSourceModel(model)
         self.table.setModel(self.proxy)
-        self.proxy.setSortCaseSensitivity(Qt.CaseInsensitive)  # сортировка без учёта регистра
+        self.proxy.setSortCaseSensitivity(Qt.CaseInsensitive)
         self.table.setSortingEnabled(True)
 
         # block interaction

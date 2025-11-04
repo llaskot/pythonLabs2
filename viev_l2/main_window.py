@@ -4,10 +4,10 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QToolBar, QSizePolicy, QWidget, QVBoxLayout, \
     QButtonGroup
 
-from viev_l2.cars_tab import CarTab
+from viev_l2.tab_cars import CarTab
 from viev_l2.clients_tab import ClientTab
 from viev_l2.rents_tab import RentsTab
-from viev_l2.table_abstract import TabAbstract
+from viev_l2.tab_abstract import TabAbstract
 
 
 class MainWindow(QMainWindow):

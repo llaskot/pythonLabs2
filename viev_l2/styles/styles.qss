@@ -5,10 +5,75 @@
     padding: 6px;
 }
 
-QPushButton[class="btn-blue"]:checked {
+
+QPushButton.btn-blue:checked {
     background-color: #1f618d;
     border: 2px solid #154360;
 }
+
+.btn-green {
+    background-color: #28B463;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+    font-size: 25px;
+}
+
+QPushButton.btn-green:pressed  {
+    background-color: #209150;
+    border: 4px solid #1a7842;
+    font-size: 24px;
+}
+
+
+.btn-orange {
+    border: 1px solid #aaa;
+    background-color: #F39C12;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+    font-size: 15px;
+
+}
+
+QPushButton.btn-orange:pressed  {
+    background-color: #e08e0b;
+    border: 2px solid #a86905;
+    font-size: 14px;
+}
+
+QPushButton.btn-orange:disabled {
+    background-color: #d9b27c; /* светлый оттенок оранжевого */
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #c89a5c; /* более мягкий бордер */
+    font-size: 15px;
+}
+
+.btn-red {
+    border: 1px solid #aaa;
+    background-color: #ba0410;
+    color: white;
+    border-radius: 6px;
+    padding: 6px;
+    font-size: 15px;
+
+}
+
+QPushButton.btn-red:pressed  {
+    background-color: #99020c;
+    border: 2px solid #690108;
+    font-size: 14px;
+}
+
+QPushButton.btn-red:disabled {
+    background-color: #f57373;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #c89a5c; /* более мягкий бордер */
+    font-size: 15px;
+}
+
+
+
 
 .search-label {
     font-size: 14pt;
@@ -33,25 +98,29 @@ QPushButton[class="btn-blue"]:checked {
 }
 
 
-.btn-green {
-    background-color: #28B463;
-    color: white;
-    border-radius: 6px;
-    padding: 6px;
-    font-size: 25px;
+
+
+
+
+
+
+.QGroupBox {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 15px; /* отступ под заголовок */
+    background-color: #949494;
+    font-size: 18px;
 
 }
-
-QPushButton[class="btn-green"]:pressed  {
-    background-color: #209150;
-    border: 4px solid #1a7842;
-    font-size: 24px;
-
+.QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 2 5px;
+    margin-left: 5px;
 }
 
-.btn-orange {
-    background-color: #F39C12;
-    color: white;
-    border-radius: 6px;
-    padding: 6px;
+.idBox {
+        background-color: #949494;
+
+
 }
