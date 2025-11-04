@@ -38,6 +38,15 @@ QPushButton[class="btn-blue"]:checked {
     color: white;
     border-radius: 6px;
     padding: 6px;
+    font-size: 25px;
+
+}
+
+QPushButton[class="btn-green"]:pressed  {
+    background-color: #209150;
+    border: 4px solid #1a7842;
+    font-size: 24px;
+
 }
 
 .btn-orange {

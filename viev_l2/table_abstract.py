@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QLineEdit
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QLineEdit, QPushButton
 
 from viev_l2.TableView import TableModel, TableSection
 
@@ -49,14 +49,30 @@ class TabAbstract(QWidget):
         input_field = QLineEdit()
         input_field.setProperty("class", "search-field")
         input_field.setStyleSheet(self.style)
-        input_field.textChanged.connect(self._on_text_changed)
+        input_field.textChanged.connect(self.on_text_changed)
 
         layout.addWidget(label)
         layout.addWidget(input_field)
 
         return section
 
-    def _on_text_changed(self, text: str):
+    def _create_add_btn(self, text: str = "Button", func=None) -> QWidget:
+        section = QWidget()
+        layout = QVBoxLayout(section)
+        layout.setContentsMargins(2, 2, 2, 2)
+        layout.setSpacing(2)
+        section.setFixedHeight(100)
+
+        btn = QPushButton(text)
+        btn.setProperty("class", "btn-green")
+        btn.setStyleSheet(self.style)
+        btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        btn.clicked.connect(func)
+
+        layout.addWidget(btn)
+        return section
+
+    def on_text_changed(self, text: str):
         filtered_data = self.search_func(text)  # список строк по текущему вводу
-        new_model = TableModel(filtered_data)
-        self.table_section.table.setModel(new_model)
+        self.table_section.proxy.sourceModel().data_list = filtered_data
+        self.table_section.proxy.sourceModel().layoutChanged.emit()

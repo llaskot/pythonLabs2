@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QFont, QColor
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QApplication
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QApplication, QHeaderView, QAbstractItemView
 from PyQt5.QtCore import Qt, QAbstractTableModel, QSortFilterProxyModel
 
 
@@ -52,15 +52,25 @@ class TableSection(QWidget):
         super().__init__()
         layout = QVBoxLayout(self)
         self.table = QTableView()
+        header = self.table.horizontalHeader()
+        header.setMinimumSectionSize(120)  # минимальная ширина столбца
+        header.setSectionResizeMode(QHeaderView.Stretch)
         layout.addWidget(self.table)
 
         model = TableModel(data)
 
         # proxy для сортировки и фильтрации
-        proxy = QSortFilterProxyModel()
-        proxy.setSourceModel(model)
-        self.table.setModel(proxy)
 
-        proxy.setSortCaseSensitivity(Qt.CaseInsensitive)  # сортировка без учёта регистра
-
+        self.proxy = QSortFilterProxyModel()
+        self.proxy.setSourceModel(model)
+        self.table.setModel(self.proxy)
+        self.proxy.setSortCaseSensitivity(Qt.CaseInsensitive)  # сортировка без учёта регистра
         self.table.setSortingEnabled(True)
+
+        # block interaction
+        self.table.setSelectionMode(QTableView.NoSelection)
+        self.table.setFocusPolicy(Qt.NoFocus)
+        self.table.setEditTriggers(QTableView.NoEditTriggers)
+        self.table.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
+
+
