@@ -47,7 +47,6 @@ class ClientTab(TabAbstract):
                 popup.exec_()
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
-        pass
 
     def on_delete(self):
         try:
@@ -60,4 +59,3 @@ class ClientTab(TabAbstract):
                 self.on_text_changed('')
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
-        pass
