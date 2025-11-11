@@ -1,12 +1,8 @@
-import inquirer
+# import inquirer
 
 from viev_l2.main_window import run_lab2
 from view.main_window import MainWindow
 
-# if __name__ == '__main__':
-#     # app = MainWindow()
-#     # app.run()
-#     run_lab2()
 
 
 if __name__ == "__main__":
