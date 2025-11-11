@@ -3,10 +3,6 @@ from typing import Callable
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QSizePolicy, QLineEdit, QPushButton, QGroupBox
 
-from viev_l2.tableView import TableModel, TableSection
-
-import PyQt5.QtWidgets as q
-
 
 class TabAbstract(QWidget):
     def __init__(self, name: str, style: str):
@@ -51,8 +47,8 @@ class TabAbstract(QWidget):
         label = QLabel(label_text, )
         label.setProperty("class", "search-label")
         label.setStyleSheet(self.style)
-        label.setFixedHeight(50)  # фиксированная высота
-        label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)  # ширина растягивается на родителя
+        label.setFixedHeight(50)
+        label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
 
         input_field = QLineEdit()
         input_field.setProperty("class", "search-field")
@@ -81,14 +77,15 @@ class TabAbstract(QWidget):
         return section
 
     def create_update_del_section(self, name: str, on_edit_func: Callable[[], None],
-                                  on_delete_func: Callable[[], None] | None = None) -> QGroupBox:
+                                  on_delete_func: Callable[[], None] | None = None,
+                                  edit_btn: str = 'Edit') -> QGroupBox:
         box = QGroupBox("Danger Zone")
         box.setProperty("class", "QGroupBox")
         box.setStyleSheet(self.style)
         box.setFixedHeight(200)
         layout = QVBoxLayout(box)
         self.id_val, inp_row = self.create_id_input(name)
-        btns_row = self.create_del_upd_btns(on_edit_func, on_delete_func)
+        btns_row = self.create_del_upd_btns(on_edit_func, on_delete_func, edit_btn)
 
         layout.addWidget(inp_row)
         layout.addWidget(btns_row)
@@ -118,7 +115,8 @@ class TabAbstract(QWidget):
         return input_line, box
 
     def create_del_upd_btns(self, on_edit_func: Callable[[], None],
-                            on_delete_func: Callable[[], None] | None = None) -> QGroupBox:
+                            on_delete_func: Callable[[], None] | None = None,
+                            edit_btn: str = "Edit") -> QGroupBox:
         box = QGroupBox()
         box.setFixedHeight(70)
         box_layout = QVBoxLayout(box)
@@ -128,7 +126,7 @@ class TabAbstract(QWidget):
         inner.setStyleSheet("background-color: #f5f5f5; border: none;")  #
         layout = QHBoxLayout(inner)
 
-        upd_btn = QPushButton("Edit")
+        upd_btn = QPushButton(edit_btn)
         self.id_val.textChanged.connect(lambda text: upd_btn.setEnabled(bool(text)))
         upd_btn.setProperty("class", "btn-orange")
         upd_btn.setStyleSheet(self.style)
@@ -150,6 +148,6 @@ class TabAbstract(QWidget):
         return box
 
     def on_text_changed(self, text: str):
-        filtered_data = self.search_func(text)  # список строк по текущему вводу
+        filtered_data = self.search_func(text)
         self.table_section.proxy.sourceModel().data_list = filtered_data
         self.table_section.proxy.sourceModel().layoutChanged.emit()
