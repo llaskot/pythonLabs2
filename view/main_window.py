@@ -3,7 +3,6 @@ import tkinter as tk
 from view.carsView import CarsView
 from view.rentsView import RentView
 from view.clientsView import ClientView
-from view.statistics import Statistics, StatisticsFrame
 
 
 class MainWindow:

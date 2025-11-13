@@ -75,11 +75,15 @@ class MainWindow(QMainWindow):
         self.contents[tab_num].show()
 
 
-def run_lab2():
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec_())
+    # def run(self):
+    #     app = QApplication(self)
+    #     window = MainWindow()
+    #     window.show()
+    #     sys.exit(app.exec_())
+    def run(self):
+        self.show()
+        QApplication.instance().exec_()
+
 
 
 if __name__ == "__main__":

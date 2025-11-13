@@ -1,6 +1,5 @@
 from connection import cursor, connection
 
-
 class Model:
     required_columns = None
     table = None

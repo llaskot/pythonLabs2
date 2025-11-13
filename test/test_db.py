@@ -1,5 +1,6 @@
 import unittest
 import sqlite3
+from datetime import datetime
 
 from db_prepare.create_tables import create_cars_table, create_users_table, create_rent_table
 from db_prepare.delete_tables import delete_cars, delete_users, delete_rents
@@ -95,5 +96,32 @@ class BbTests(unittest.TestCase):
         res = RentModel.find_all()
         print(res)
         self.assertEqual({'columns': ['id', 'car_id', 'client_id', 'start_date', 'days_qty', 'total_price', 'active'],
-                          'values': [(1, 1, 2, '2025-09-27', 3, 500.0, 1), (2, 2, 4, '2025-09-27', 8, 980.0, 1)],
+                          'values': [(1, 1, 2, datetime.now().strftime("%Y-%m-%d"), 3, 500.0, 1), (2, 2, 4, datetime.now().strftime("%Y-%m-%d"), 8, 980.0, 1)],
                           'qty': 2}, res)
+
+
+
+def run():
+    GREEN = "\033[92m"
+    RED = "\033[91m"
+    YELLOW = "\033[93m"
+    CYAN = "\033[96m"
+    RESET = "\033[0m"
+
+    print(f"{CYAN}🚀 Starting Car Rent Database Tests...\n{RESET}")
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(BbTests)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+
+    fails = len(result.failures)
+    errors = len(result.errors)
+    total = result.testsRun
+    passed = total - fails - errors
+
+    print("\n" + "-" * 40)
+    print(f"{GREEN}✅ Passed: {passed}{RESET}")
+    print(f"{RED}❌ Failed: {fails}{RESET}")
+    print(f"{YELLOW}⚠️  Errors: {errors}{RESET}")
+    print("-" * 40)
+
+if __name__ == "__main__":
+    run()

@@ -2,8 +2,6 @@ import sqlite3
 
 from connection import DB_PATH
 
-# connection = sqlite3.connect(DB_PATH)
-
 
 create_cars_table = '''CREATE TABLE IF NOT EXISTS cars (
     id INTEGER PRIMARY KEY,

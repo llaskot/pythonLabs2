@@ -1,24 +1,29 @@
-# import inquirer
+import sys
 
-from viev_l2.main_window import run_lab2
-from view.main_window import MainWindow
+from PyQt5.QtWidgets import QApplication
 
+from test.test_db import BbTests
+from viev_l2.main_window import  MainWindow as l3
+
+from view.main_window import MainWindow as l2
+import test.test_db as l1
 
 
 if __name__ == "__main__":
-    print("Выбери лабораторную:")
-    print("1 — lab1")
-    print("2 — lab2")
-    print("3 — выход")
+    print("select job:\n 1 — laba1\n 2 — laba2\n 3 — laba3\n 4 — Exit")
 
-    choice = input("Введите номер: ")
-
+    choice = input("Input number (1-3): ")
+    app = None
     if choice == "1":
-        print("Запуск lab1...")
+        print("Start lab1...")
+        app = l1
     elif choice == "2":
-        app = MainWindow()
-        app.run()
+        app = l2()
     elif choice == "3":
-        run_lab2()
+        qapp = QApplication(sys.argv)
+        app = l3()
     else:
-        print("Выход.")
+        print("Exit.")
+
+    if app:
+        app.run()
