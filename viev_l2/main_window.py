@@ -74,20 +74,14 @@ class MainWindow(QMainWindow):
             tab.hide()
         self.contents[tab_num].show()
 
-
-    # def run(self):
-    #     app = QApplication(self)
-    #     window = MainWindow()
-    #     window.show()
-    #     sys.exit(app.exec_())
     def run(self):
         self.show()
         QApplication.instance().exec_()
 
 
 
-if __name__ == "__main__":
-    app1 = QApplication(sys.argv)
-    window1 = MainWindow()
-    window1.show()
-    sys.exit(app1.exec_())
+# if __name__ == "__main__":
+#     app1 = QApplication(sys.argv)
+#     window1 = MainWindow()
+#     window1.show()
+#     sys.exit(app1.exec_())
